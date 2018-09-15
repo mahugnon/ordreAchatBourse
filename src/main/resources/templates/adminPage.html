@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Accueil</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" th:href="@{../css/style.css}">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+	<div class="container">
+		<div class="panel panel-success">
+			<form th:action="@{/logout}" class="pull-right" method="post">
+				<input type="submit" class="btn btn-default" value="Déconnexion" />
+			</form>
+			<div class="panel-heading">
+
+				<span class="pull-center"><h2>Bienvenue
+						[[${#httpServletRequest.remoteUser}]]</h2></span>
+			</div>
+			<div class="panel-body">
+
+				<fieldset>
+					<legend>Parametrer Tarif</legend>
+					<form data-toggle="validator" method="post" class="form-horizontal"
+						role="form" id="creerTarif">
+						<div class="form-group">
+							<div class="col-sm-9">
+								<label for="typeTarif">Type</label> <input required="required"
+									type="radio" name="typeTarif" value="pourcentage"
+									id="typeTarif" /> Pourcentage&nbsp;&nbsp; <input type="radio"
+									name="typeTarif" value="euro" id="typeTarif" /> Euro
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-9">
+								<label for="minCond">Condition Min.</label> <input
+									required="required" type="number" step="0.01" id="minCond"
+									name="minCond" placeholder="Condition minimale"
+									class="form-control" /> <label id="minCondError"
+									class="label label-danger"></label>
+
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-9">
+								<label for="maxCond">Condition Max.</label> <input
+									required="required" type="number" step="0.01" id="maxCond"
+									name="maxCond" placeholder="Condition maximale"
+									class="form-control" /> <label id="maxCondError"
+									class="label label-danger"></label>
+
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-9">
+								<label for="valTarif">Valeur du tarif</label> <input
+									required="required" type="number" step="0.01" id="valTarif"
+									name="valTarif" placeholder="Valeur du tarif"
+									class="form-control" /> <label id="valTarifError"
+									class="label label-danger"></label>
+
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-9">
+								<button type="submit" class="btn btn-primary btn-block">Valider
+									</button>
+							</div>
+						</div>
+					</form>
+				</fieldset>
+			</div>
+		</div>
+
+	</div>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" th:src="@{../js/client.js}"></script>
+</body>
+</html>

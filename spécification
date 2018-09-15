@@ -1,0 +1,63 @@
+Livrables
+A partir de l'expression de besoin ci-dessous, on aimerait avoir:
+
+·        Un schéma du système
+
+·         La liste des services envisagés pour le projet et leur rôle
+
+o    Ex: Service tarification - s'occupe de calculer les frais liés à chaque opération
+
+·         Un POC (Proof Of Concept) d'un ou plusieurs éléments du système avec la stack technologique de votre choix
+
+o    On s'intéresse ici à la partie métier (traitement des messages): une interface graphique n'est pas nécessaire pour le POC
+
+L'expression de besoin est volontairement peu détaillée: le but de l'exercice est également d'encourager la discussion et je suis disponible pour répondre aux questions et aux demandes de précisions.
+
+Expression de besoin
+Une société nous sollicite pour mettre en place une plateforme qui permet à ses clients de placer des ordres d'achats ou de vente en bourse.
+
+Un ordre d'achat/vente est un message à destination du marché qui indique qu'une personne souhaite acheter/vendre un certain nombre d'instrument (actions dans le cadre du POC).
+
+Exemple : Mr Dupont veut acheter 10 actions Total (identifié par le code ISIN FR0000120271 actuellement au cours de 55€) à partir de son compte XXYYZZ.
+
+En entrée de l’application
+On reçoit un message qui contient:
+
+L'identifiant du client
+Le compte bancaire à partir duquel il souhaite placer l'ordre
+Le code ISIN de l'instrument qu'il souhaite acheter ou vendre
+La quantité d'instrument
+Le sens de l'ordre (achat ou vente)
+Contrôles effectués
+L'application va s'assurer:
+
+·         que le compte est bien lié à l'utilisateur
+
+·         en cas d'achat, que le compte client possède bien le cash nécessaire pour placer un tel achat
+
+·         en cas de vente, que le compte possède bien les instruments qu'il souhaite mettre en vente
+
+Tarification
+La société facture à ses clients chaque passage d'ordre.
+
+Pour faire face à la concurrence, la tarification est amenée à évoluer fréquemment : il faut donc qu’elle soit paramétrable.
+
+La grille de tarification actuelle est la suivante:
+
+·         10€ pour les ordres dont le montant brut est inférieur ou égal à 1000€ (où montant brut = quantité d'actions * cout)
+
+·         0.8% du montant brut au-delà de ce montant
+
+En sortie de l’application
+En cas de succès de l'opération:
+On enregistre un message avec
+Les caractéristiques de l'ordre
+Le montant brut et le montant net (montant net = montant brut +/- frais)
+Le portefeuille du compte est mis à jour pour tenir compte de l'ordre
+Ordre de vente: réservation des instruments
+Ordre d'achat: réservation du montant cash nécessaire pour placer l'ordre
+Un message de succès est remonté
+En cas d'échec à l'un des contrôles:
+Un log d'erreur est généré avec un message d'erreur en fonction du contrôle qui a échoué
+Un message d'erreur est remonté avec un code représentant la raison de l'échec
+ 
